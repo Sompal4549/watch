@@ -132,6 +132,15 @@
         left: 190px;
         transform-origin: bottom;
       }
+      .day {
+        font-size: 20px;
+        letter-spacing: 1.9px;
+        position: absolute;
+        bottom: 70px;
+        left: 25%;
+        z-index: 10;
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
@@ -143,17 +152,18 @@
           <div class="m-hand" id="minute"></div>
           <div class="s-hand" id="second"></div>
           <!-- <div class="ms-hand" id="milisecond"></div> -->
+          <div id="day" class="day"></div>
         </div>
       </div>
     </main>
     <script>
-      let needles = [
-        document.getElementById("hour"),
-        document.getElementById("minute"),
-        document.getElementById("second"),
-        // document.getElementById("milisecond"),
-      ];
       function clockInit() {
+        let needles = [
+          document.getElementById("hour"),
+          document.getElementById("minute"),
+          document.getElementById("second"),
+          // document.getElementById("milisecond"),
+        ];
         let date = new Date();
         let time = [
           date.getHours(),
@@ -174,7 +184,43 @@
         clockInit();
         setInterval(clockInit, 1000);
       };
-      console.log(needles[1]);
+
+      var dayInletter = "";
+      var hour = new Date().getHours();
+      if(hour>12){
+        hour="PM"
+      }
+      else{
+        hour="AM"
+      }
+      var date = new Date().getDate();
+      var month= new Date().getMonth()+1;
+      switch (new Date().getDay()) {
+        case 0:
+          dayInletter += "Sunday";
+          break;
+        case 1:
+          dayInletter += "Monday";
+          break;
+        case 2:
+          dayInletter += "Tuesday";
+          break;
+        case 3:
+          dayInletter += "Wednesday";
+          break;
+        case 4:
+          dayInletter += "Thursday";
+          break;
+        case 5:
+          dayInletter += "Friday";
+          break;
+        case 6:
+          dayInletter += "Saturday";
+      }
+
+      document.getElementById(
+        "day"
+      ).innerHTML = `${hour} ${dayInletter} &nbsp;${date}/${month}`;
     </script>
   </body>
 </html>
