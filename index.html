@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clock</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Roboto, Open Sans, sans-serif;
+      }
+      body {
+        background-image: linear-gradient(to bottom right, red, yellow);
+        width: 100%;
+        height: 100vh;
+        position: relative;
+      }
+      .clock-background {
+        width: 500px;
+        position: absolute;
+        height: 500px;
+        min-height: 280px;
+        min-width: 280px;
+        background-color: gray;
+        border: 4px solid black;
+        border-radius: 100px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .clock {
+        width: 80%;
+        height: 80%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-image: linear-gradient(
+          to top,
+          rgba(250, 250, 250, 0.8),
+          rgba(0, 0, 0, 0.8)
+        );
+        border-radius: 100%;
+        border: 4px solid black;
+        box-shadow: 0px 6px 10px 4px rgba(0, 0, 0, 0.8);
+      }
+      .band {
+        width: 80%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 350px;
+        border-radius: 50px;
+        background-image: linear-gradient(
+          to right,
+          rgba(26, 24, 24, 0.9),
+          rgba(8, 8, 8, 1)
+        );
+      }
+      .clock::after {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background-color: black;
+        border-radius: 100%;
+        box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.8);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9;
+      }
+      .clock::before {
+        content: "";
+        z-index: 10;
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.04);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(2.5px);
+        -webkit-backdrop-filter: blur(2.5px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+      }
+      .h-hand {
+        position: absolute;
+        top: 67px;
+        left: 190px;
+        width: 8px;
+        height: 125px;
+        transform-origin: bottom;
+        background-color: black;
+        /* transition: transform 0.9s; */
+        /* transform: rotate(180deg); */
+      }
+      .m-hand {
+        position: absolute;
+        width: 6px;
+        height: 150px;
+        top: 45px;
+        left: 190px;
+        /* transform: rotate(100deg); */
+        transform-origin: bottom;
+        background-color: black;
+        /* transition: transform 0.9s; */
+      }
+      .s-hand {
+        position: absolute;
+        width: 4px;
+        height: 175px;
+        top: 19px;
+        /* transform: rotate(90deg); */
+        left: 190px;
+        transform-origin: bottom;
+        background-color: black;
+      }
+      .ms-hand {
+        position: absolute;
+        width: 3px;
+        height: 180px;
+        top: 10px;
+        background-color: black;
+        left: 190px;
+        transform-origin: bottom;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="band"></div>
+      <div class="clock-background">
+        <div class="clock">
+          <div class="h-hand" id="hour"></div>
+          <div class="m-hand" id="minute"></div>
+          <div class="s-hand" id="second"></div>
+          <!-- <div class="ms-hand" id="milisecond"></div> -->
+        </div>
+      </div>
+    </main>
+    <script>
+      let needles = [
+        document.getElementById("hour"),
+        document.getElementById("minute"),
+        document.getElementById("second"),
+        // document.getElementById("milisecond"),
+      ];
+      function clockInit() {
+        let date = new Date();
+        let time = [
+          date.getHours(),
+          date.getMinutes(),
+          date.getSeconds(),
+          // date.getMilliseconds(),
+        ];
+
+        var hour = time[1] / 2 + time[0] * 30;
+        needles[0].style.transform = "rotate(" + hour + "deg)";
+        needles[1].style.transform = `rotate(${time[1] * 6}deg)`;
+        needles[2].style.transform = `rotate(${time[2] * 6}deg`;
+        // console.log(time);
+        // needles[3].style.transform = `rotate(${time[3] * 10}deg`;
+      }
+      clockInit();
+      window.onload = function () {
+        clockInit();
+        setInterval(clockInit, 1000);
+      };
+      console.log(needles[1]);
+    </script>
+  </body>
+</html>
