@@ -87,7 +87,7 @@
         transform: translate(-50%, -50%);
         background: rgba(255, 255, 255, 0.04);
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(2.5px);
+        backdrop-filter: blur(2.2px);
         -webkit-backdrop-filter: blur(2.5px);
         border: 1px solid rgba(255, 255, 255, 0.8);
       }
@@ -133,11 +133,14 @@
         transform-origin: bottom;
       }
       .day {
+        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+        color: black;
         font-size: 20px;
         letter-spacing: 1.9px;
         position: absolute;
         bottom: 70px;
-        left: 25%;
+        left: 15%;
+        filter: blur(0.799px);
         z-index: 10;
         font-weight: bold;
       }
@@ -171,8 +174,18 @@
           date.getSeconds(),
           // date.getMilliseconds(),
         ];
-
+        var datte = new Date().getDate();
+        var hours = new Date().getHours();
+        if (hour > 12) {
+          hours = "PM";
+        } else {
+          hours = "AM";
+        }
+        document.getElementById(
+          "day"
+        ).innerHTML = `${time[0]}:${time[1]} ${hours} ${dayInletter} &nbsp;${datte}/${month}`;
         var hour = time[1] / 2 + time[0] * 30;
+
         needles[0].style.transform = "rotate(" + hour + "deg)";
         needles[1].style.transform = `rotate(${time[1] * 6}deg)`;
         needles[2].style.transform = `rotate(${time[2] * 6}deg`;
@@ -186,36 +199,68 @@
       };
 
       var dayInletter = "";
-      var hour = new Date().getHours();
-      if(hour>12){
-        hour="PM"
-      }
-      else{
-        hour="AM"
-      }
+
       var date = new Date().getDate();
-      var month= new Date().getMonth()+1;
-      switch (new Date().getDay()) {
-        case 0:
-          dayInletter += "Sunday";
-          break;
+      var month = new Date().getMonth() + 1;
+      switch (month) {
         case 1:
-          dayInletter += "Monday";
+          month += "(JAN)";
           break;
         case 2:
-          dayInletter += "Tuesday";
+          month += "(FEB)";
           break;
         case 3:
-          dayInletter += "Wednesday";
+          month += "(MAR)";
           break;
         case 4:
-          dayInletter += "Thursday";
+          month += "(APR)";
           break;
         case 5:
-          dayInletter += "Friday";
+          month += "MAY";
           break;
         case 6:
-          dayInletter += "Saturday";
+          month += "(JUN)";
+          break;
+        case 7:
+          month += "(JUL)";
+          break;
+        case 8:
+          month += "(AUG)";
+          break;
+        case 9:
+          month += "(SEP)";
+          break;
+        case 10:
+          month += "(OCT)";
+          break;
+        case 11:
+          month += "NOV";
+          break;
+        case 12:
+          month += "DEC";
+          break;
+      }
+      switch (new Date().getDay()) {
+        case 0:
+          dayInletter += "SUN";
+          break;
+        case 1:
+          dayInletter += "MON";
+          break;
+        case 2:
+          dayInletter += "TUE";
+          break;
+        case 3:
+          dayInletter += "WED";
+          break;
+        case 4:
+          dayInletter += "THU";
+          break;
+        case 5:
+          dayInletter += "FRI";
+          break;
+        case 6:
+          dayInletter += "SAT";
       }
 
       document.getElementById(
