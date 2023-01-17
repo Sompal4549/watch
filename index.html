@@ -76,20 +76,22 @@
         z-index: 9;
       }
       .clock::before {
+        border: 36px dashed black;
         content: "";
         z-index: 10;
+        /* border-block-style: inherit; */
         position: absolute;
         top: 50%;
         width: 100%;
         height: 100%;
         border-radius: 100%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) rotate(354deg);
         background: rgba(255, 255, 255, 0.04);
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
         backdrop-filter: blur(2.2px);
         -webkit-backdrop-filter: blur(2.5px);
-        border: 1px solid rgba(255, 255, 255, 0.8);
+        outline: 1px solid rgba(255, 255, 255, 0.8);
       }
       .h-hand {
         position: absolute;
